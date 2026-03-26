@@ -97,7 +97,7 @@ export function ExplorerLayout({ children }: { children: React.ReactNode }) {
 
       {/* Top Bar */}
       <header className="shrink-0 z-50 flex h-12 items-center border-b bg-background px-4">
-        <Link href="/" className="flex items-center gap-2 font-bold text-primary">
+        <Link href="/explorer" className="flex items-center gap-2 font-bold text-primary">
           <Layers className="h-5 w-5" />
           <span>Component Explorer</span>
         </Link>

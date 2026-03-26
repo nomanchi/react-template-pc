@@ -23,12 +23,12 @@ export const EXPLORER_NAV: NavGroup[] = [
     color: 'text-blue-600 dark:text-blue-400',
     dotColor: 'bg-blue-500',
     items: [
-      { label: 'Button', href: '/components/atoms/button', description: '버튼 컴포넌트' },
-      { label: 'Typography', href: '/components/atoms/typography', description: '타이포그래피' },
-      { label: 'Badge', href: '/components/atoms/badge', description: '뱃지/라벨' },
-      { label: 'Avatar', href: '/components/atoms/avatar', description: '아바타' },
-      { label: 'Spinner', href: '/components/atoms/spinner', description: '로딩 인디케이터' },
-      { label: 'Input', href: '/components/atoms/input', description: '텍스트 입력' },
+      { label: 'Button', href: '/explorer/components/atoms/button', description: '버튼 컴포넌트' },
+      { label: 'Typography', href: '/explorer/components/atoms/typography', description: '타이포그래피' },
+      { label: 'Badge', href: '/explorer/components/atoms/badge', description: '뱃지/라벨' },
+      { label: 'Avatar', href: '/explorer/components/atoms/avatar', description: '아바타' },
+      { label: 'Spinner', href: '/explorer/components/atoms/spinner', description: '로딩 인디케이터' },
+      { label: 'Input', href: '/explorer/components/atoms/input', description: '텍스트 입력' },
     ],
   },
   {
@@ -36,9 +36,9 @@ export const EXPLORER_NAV: NavGroup[] = [
     color: 'text-purple-600 dark:text-purple-400',
     dotColor: 'bg-purple-500',
     items: [
-      { label: 'FormField', href: '/components/molecules/form-field', description: 'RHF 통합 폼 필드' },
-      { label: 'SearchInput', href: '/components/molecules/search-input', description: 'Debounce 검색창' },
-      { label: 'ConfirmDialog', href: '/components/molecules/confirm-dialog', description: '확인/취소 모달' },
+      { label: 'FormField', href: '/explorer/components/molecules/form-field', description: 'RHF 통합 폼 필드' },
+      { label: 'SearchInput', href: '/explorer/components/molecules/search-input', description: 'Debounce 검색창' },
+      { label: 'ConfirmDialog', href: '/explorer/components/molecules/confirm-dialog', description: '확인/취소 모달' },
     ],
   },
   {
@@ -46,9 +46,9 @@ export const EXPLORER_NAV: NavGroup[] = [
     color: 'text-emerald-600 dark:text-emerald-400',
     dotColor: 'bg-emerald-500',
     items: [
-      { label: 'Header', href: '/components/organisms/header', description: '상단 네비게이션' },
-      { label: 'Sidebar', href: '/components/organisms/sidebar', description: '사이드바 메뉴' },
-      { label: 'PageHeader', href: '/components/organisms/page-header', description: '페이지 헤더' },
+      { label: 'Header', href: '/explorer/components/organisms/header', description: '상단 네비게이션' },
+      { label: 'Sidebar', href: '/explorer/components/organisms/sidebar', description: '사이드바 메뉴' },
+      { label: 'PageHeader', href: '/explorer/components/organisms/page-header', description: '페이지 헤더' },
     ],
   },
   {
@@ -56,7 +56,7 @@ export const EXPLORER_NAV: NavGroup[] = [
     color: 'text-orange-600 dark:text-orange-400',
     dotColor: 'bg-orange-500',
     items: [
-      { label: '개요', href: '/components/templates', description: '템플릿 목록' },
+      { label: '개요', href: '/explorer/components/templates', description: '템플릿 목록' },
       { label: 'DefaultLayout', href: '/templates/default-layout', description: '기본 레이아웃 (새 탭)' },
       { label: 'AuthLayout', href: '/templates/auth-layout', description: '인증 레이아웃 (새 탭)' },
       { label: 'DashboardLayout', href: '/templates/dashboard-layout', description: '대시보드 레이아웃 (새 탭)' },
