@@ -254,6 +254,7 @@ function HeroSection() {
 
       <h1 className="mb-4 text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-6xl lg:text-7xl">
         안녕하세요,{' '}
+        <br />
         <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-sky-500 bg-clip-text text-transparent">
           정의성
         </span>
