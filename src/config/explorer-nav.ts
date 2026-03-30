@@ -29,6 +29,7 @@ export const EXPLORER_NAV: NavGroup[] = [
       { label: 'Avatar', href: '/explorer/components/atoms/avatar', description: '아바타' },
       { label: 'Spinner', href: '/explorer/components/atoms/spinner', description: '로딩 인디케이터' },
       { label: 'Input', href: '/explorer/components/atoms/input', description: '텍스트 입력' },
+      { label: 'usePullToRefresh', href: '/explorer/components/atoms/pull-to-refresh', description: '당겨서 새로고침 훅' },
     ],
   },
   {

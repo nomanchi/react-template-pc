@@ -7,7 +7,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { Layers, Menu, X } from 'lucide-react';
+import { Layers, Menu, X, ArrowLeft } from 'lucide-react';
 import { EXPLORER_NAV } from '@/config/explorer-nav';
 import { cn } from '@/lib/utils';
 
@@ -102,16 +102,25 @@ export function ExplorerLayout({ children }: { children: React.ReactNode }) {
           <span>Component Explorer</span>
         </Link>
         <span className="ml-3 hidden text-xs text-muted-foreground sm:block">
-          react-template-pc · Atomic Design
+          portfolio-react · Atomic Design
         </span>
-        <button
-          type="button"
-          className="ml-auto rounded-md p-1.5 hover:bg-muted md:hidden"
-          onClick={() => setMobileNavOpen((v) => !v)}
-          aria-label="메뉴 열기"
-        >
-          {mobileNavOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-        </button>
+        <div className="ml-auto flex items-center gap-2">
+          <Link
+            href="/"
+            className="flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline">포트폴리오</span>
+          </Link>
+          <button
+            type="button"
+            className="rounded-md p-1.5 hover:bg-muted md:hidden"
+            onClick={() => setMobileNavOpen((v) => !v)}
+            aria-label="메뉴 열기"
+          >
+            {mobileNavOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+          </button>
+        </div>
       </header>
 
       {/* Body */}

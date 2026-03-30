@@ -1,7 +1,7 @@
 # 코드 컨벤션 가이드 (CONVENTIONS.md)
 
-> 이 문서는 `react-template-pc` 프로젝트의 코딩 컨벤션을 정의합니다.
-> 팀 전체가 동일한 방식으로 코드를 작성할 수 있도록 합니다.
+> 이 문서는 `portfolio-react` 프로젝트의 코딩 컨벤션을 정의합니다.
+> 프로젝트 전반에 걸쳐 일관된 방식으로 코드를 작성할 수 있도록 합니다.
 
 ---
 
@@ -17,7 +17,9 @@
 | 스키마 파일 | camelCase + `.schema.ts` | `common.schema.ts` |
 | 스토어 파일 | camelCase + `.store.ts` | `auth.store.ts` |
 | 서비스 파일 | camelCase + `.service.ts` | `auth.service.ts` |
+| 목 파일 | camelCase + `.mock.ts` | `user.mock.ts` |
 | 상수 파일 | camelCase | `routes.ts`, `app.ts` |
+| 설정 파일 | camelCase | `explorer-nav.ts` |
 | 라우트/페이지 | kebab-case | `app/user-profile/page.tsx` |
 
 ---
@@ -34,23 +36,28 @@ interface UserCardProps {
   onClick?: () => void;
 }
 
-// ❌ default export 사용 금지 (named export 권장)
-export default function UserCard() { ... }  // 지양
+// ✅ Named export 권장
+// ❌ 단, Next.js page.tsx / layout.tsx / error.tsx 등 App Router 규약 파일은 default export 필수
+export default function PortfolioPage() { ... }  // page.tsx 한정 허용
 ```
 
 ---
 
 ## 3. Atomic Design 컴포넌트 배치 기준
 
-| 레이어 | 기준 | 예시 |
+| 레이어 | 기준 | 실제 예시 |
 |---|---|---|
-| **Atoms** | 더 이상 분리할 수 없는 최소 단위 | Button, Input, Badge, Avatar, Spinner |
-| **Molecules** | Atoms 2개 이상의 조합으로 하나의 기능 | FormField, SearchInput, UserCard |
-| **Organisms** | 페이지 섹션을 구성하는 복잡한 컴포넌트 | Header, Sidebar, DataTable, Footer |
-| **Templates** | 페이지 레이아웃 뼈대 (데이터 없음) | DefaultLayout, AuthLayout, DashboardLayout |
+| **Atoms** | 더 이상 분리할 수 없는 최소 단위 | Typography, Spinner, Button, Input, Badge, Avatar, Skeleton, Separator, Progress |
+| **Molecules** | Atoms 2개 이상의 조합으로 하나의 기능 | FormField, SearchInput, ConfirmDialog |
+| **Organisms** | 페이지 섹션을 구성하는 복잡한 컴포넌트 | Header, Sidebar, PageHeader |
+| **Templates** | 페이지 레이아웃 뼈대 (데이터 없음) | DefaultLayout, AuthLayout, DashboardLayout, ExplorerLayout |
+| **Showcase** | Explorer 전용 컴포넌트 쇼케이스 | `components/showcase/` |
 
 > **규칙**: 상위 레이어는 하위 레이어를 import할 수 있지만 역방향은 불가.
 > `Atoms → Molecules → Organisms → Templates → Pages`
+
+> **shadcn/ui**: `components/ui/`의 shadcn 컴포넌트는 Atoms와 동급으로 취급하며,
+> `components/atoms/index.ts`에서 re-export하여 단일 진입점으로 통합합니다.
 
 ---
 
@@ -94,6 +101,8 @@ const isMobile = useMediaQuery('(max-width: 768px)');
 const debouncedValue = useDebounce(value, 300);
 ```
 
+실제 구현된 훅: `useDebounce`, `useLocalStorage`, `useMediaQuery`
+
 ---
 
 ## 6. TypeScript 타입/인터페이스
@@ -126,7 +135,7 @@ type UserRoleValue = typeof USER_ROLES[keyof typeof USER_ROLES];
 export function useUserQuery(id: string) {
   return useQuery({
     queryKey: ['user', id],
-    queryFn: () => userService.getUser(id),
+    queryFn: () => authService.getUser(id),
     enabled: !!id,
   });
 }
@@ -135,7 +144,7 @@ export function useUserQuery(id: string) {
 export function useUpdateUserMutation() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: userService.updateUser,
+    mutationFn: authService.updateUser,
     onSuccess: (_, { id }) => {
       queryClient.invalidateQueries({ queryKey: ['user', id] });
     },
@@ -149,6 +158,7 @@ export function useUpdateUserMutation() {
 
 ```tsx
 // ✅ React Hook Form + Zod 조합 사용
+// 스키마는 lib/validators/common.schema.ts 에 정의
 const schema = z.object({ email: z.string().email() });
 type FormValues = z.infer<typeof schema>;
 
@@ -168,10 +178,13 @@ const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({
 // ✅ 라우트는 ROUTES 상수 사용
 import { ROUTES } from '@/constants';
 router.push(ROUTES.AUTH.LOGIN);
+router.push(ROUTES.DASHBOARD.ROOT);
 
 // ❌ 하드코딩 금지
 router.push('/login');
 ```
+
+실제 ROUTES 구조: `HOME`, `AUTH.LOGIN/SIGNUP/FORGOT_PASSWORD`, `DASHBOARD.ROOT/ANALYTICS/USERS/SETTINGS`
 
 ---
 
@@ -193,12 +206,30 @@ router.push('/login');
 ```ts
 // ✅ 각 디렉토리에 index.ts 필수
 // src/components/atoms/index.ts
-export * from './Button';
-export * from './Input';
+export * from './Typography';
+export * from './Spinner';
+// shadcn/ui atoms (re-export for convenience)
+export { Button } from '@/components/ui/button';
+export { Badge } from '@/components/ui/badge';
+// ...
 
 // ✅ import 시 디렉토리 레벨로 import
-import { Button, Input } from '@/components/atoms';
+import { Typography, Spinner, Button, Badge } from '@/components/atoms';
 
 // ❌ 파일 직접 경로 지양 (공통 컴포넌트의 경우)
 import { Button } from '@/components/atoms/Button/index';
 ```
+
+---
+
+## 12. Mock 데이터
+
+```ts
+// ✅ 개발/테스트용 목 데이터는 src/mocks/ 에 관리
+// src/mocks/user.mock.ts
+// src/mocks/table.mock.ts
+
+import { mockUsers } from '@/mocks';
+```
+
+목 데이터는 UI 쇼케이스(Explorer)와 개발 환경 전용으로만 사용하며, 프로덕션 코드에서 직접 참조 금지.
