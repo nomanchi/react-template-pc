@@ -19,7 +19,7 @@ export function AuthLayout({ children, className }: AuthLayoutProps) {
           <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground font-bold text-xl">
             T
           </div>
-          <h1 className="text-2xl font-bold">Template PC</h1>
+          <h1 className="text-2xl font-bold">React Template</h1>
         </div>
         {/* Content */}
         {children}

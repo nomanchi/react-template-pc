@@ -55,6 +55,20 @@ function DarkModeToggle() {
   );
 }
 
+const NAV_LABELS: Record<string, string> = {
+  skills: 'Skills',
+  experience: 'Experience',
+  projects: 'Projects',
+  contact: 'Contact',
+};
+
+function scrollToSection(id: string) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
 function NavBar() {
   const [scrolled, setScrolled] = useState(false);
 
@@ -80,13 +94,14 @@ function NavBar() {
 
         <nav className="hidden items-center gap-6 text-sm font-medium text-slate-600 dark:text-slate-300 sm:flex">
           {(['skills', 'experience', 'projects', 'contact'] as const).map((id) => (
-            <a
+            <button
               key={id}
-              href={`#${id}`}
+              type="button"
+              onClick={() => scrollToSection(id)}
               className="capitalize transition-colors hover:text-indigo-600 dark:hover:text-indigo-400"
             >
-              {id === 'skills' ? 'Skills' : id === 'experience' ? 'Experience' : id === 'projects' ? 'Projects' : 'Contact'}
-            </a>
+              {NAV_LABELS[id]}
+            </button>
           ))}
           <Link
             href="/explorer"
@@ -102,6 +117,7 @@ function NavBar() {
     </header>
   );
 }
+
 
 function HeroSection() {
   return (
@@ -146,20 +162,22 @@ function HeroSection() {
       </div>
 
       <div className="flex flex-wrap items-center justify-center gap-3">
-        <a
-          href="#projects"
+        <button
+          type="button"
+          onClick={() => scrollToSection('projects')}
           className="inline-flex items-center gap-2 rounded-full bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 transition-all hover:bg-indigo-700 hover:-translate-y-0.5"
         >
           <Briefcase className="h-4 w-4" />
           Projects
-        </a>
-        <a
-          href="#contact"
+        </button>
+        <button
+          type="button"
+          onClick={() => scrollToSection('contact')}
           className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 shadow-sm transition-all hover:border-slate-300 hover:shadow hover:-translate-y-0.5 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200"
         >
           <MessageCircle className="h-4 w-4" />
           Contact
-        </a>
+        </button>
         <a
           href={INTRODUCE.github}
           target="_blank"
@@ -171,13 +189,14 @@ function HeroSection() {
         </a>
       </div>
 
-      <a
-        href="#skills"
+      <button
+        type="button"
+        onClick={() => scrollToSection('skills')}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 text-slate-400 transition-colors hover:text-indigo-500 dark:text-slate-500"
         aria-label="아래로 스크롤"
       >
         <ArrowDown className="h-6 w-6 animate-bounce" />
-      </a>
+      </button>
     </section>
   );
 }

@@ -45,7 +45,7 @@ const defaultNavItems: NavItem[] = [
 
 export function Header({
   navItems = defaultNavItems,
-  logoText = 'Template PC',
+  logoText = 'React Template',
   className,
 }: HeaderProps) {
   const router = useRouter();

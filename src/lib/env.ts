@@ -9,7 +9,7 @@ import { z } from 'zod';
 const envSchema = z.object({
   // ── Public (클라이언트 접근 가능) ──────
   NEXT_PUBLIC_API_URL: z.string().url({ message: 'NEXT_PUBLIC_API_URL must be a valid URL' }),
-  NEXT_PUBLIC_APP_NAME: z.string().default('React Template PC'),
+  NEXT_PUBLIC_APP_NAME: z.string().default('React Template'),
   NEXT_PUBLIC_APP_ENV: z
     .enum(['development', 'staging', 'production'])
     .default('development'),
@@ -36,7 +36,7 @@ function parseEnv() {
 
   return result.data ?? {
     NEXT_PUBLIC_API_URL: 'http://localhost:8080/api',
-    NEXT_PUBLIC_APP_NAME: 'React Template PC',
+    NEXT_PUBLIC_APP_NAME: 'React Template',
     NEXT_PUBLIC_APP_ENV: 'development' as const,
   };
 }

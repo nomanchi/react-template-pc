@@ -10,8 +10,8 @@ const geistSans = Geist({
 
 export const metadata: Metadata = {
   title: {
-    default: 'React Template PC',
-    template: '%s | React Template PC',
+    default: 'React Template',
+    template: '%s | React Template',
   },
   description:
     'Next.js 15 + TypeScript + TailwindCSS + shadcn/ui 기반 PC 프론트엔드 템플릿',

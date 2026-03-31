@@ -57,7 +57,7 @@ const initials = user?.name.slice(0, 2).toUpperCase();`} />
             <tbody>
               {[
                 { name: 'navItems', type: 'NavItem[]', desc: '네비게이션 링크 목록. 기본값: 홈, 대시보드' },
-                { name: 'logoText', type: 'string', desc: '좌측 로고 텍스트. 기본값: "Template PC"' },
+                { name: 'logoText', type: 'string', desc: '좌측 로고 텍스트. 기본값: "Template"' },
                 { name: 'className', type: 'string', desc: '추가 CSS 클래스' },
               ].map((p, i) => (
                 <tr key={p.name} className={i % 2 === 0 ? '' : 'bg-muted/20'}>

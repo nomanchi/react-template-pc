@@ -22,7 +22,7 @@ export function DefaultLayout({ children, className, logoText }: DefaultLayoutPr
       <footer className="border-t py-6">
         <div className="container mx-auto max-w-screen-xl px-4">
           <p className="text-center text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Template PC. All rights reserved.
+            © {new Date().getFullYear()} React Template. All rights reserved.
           </p>
         </div>
       </footer>
